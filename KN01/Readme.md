@@ -43,10 +43,18 @@ Man konnte nicht mehr Prozessoren hinzufügen, als mein Laptop hat.
 
 ![alt CPU Error](error-more-processor-than-host.png)
 
+## lscpu | grep "CPU(s)"
+
+![alt lscpu](lscpu.png)
+
 ## RAM hinzufügen
 Man konnte nicht mehr RAM hinzufügen, als mein Laptop hat.
 
 ![alt RAM Error](error-more-ram-than-host.png)
+
+## free -h
+
+![alt lscpu](free-h.png)
 
 ---
 
