@@ -1,16 +1,16 @@
 ## funktionierenden Webseiten
 ### index.html
-![alt aws](index.png)
+![alt index](img/index.png)
 ### info.php
-![alt aws](info.png)
+![alt info](img/info.png)
 ### db.php
-![alt aws](db.png)
+![alt db](img/db.png)
 ## Details der Instanz mit öffentlichen IP
-![alt aws](insctance-ip.png)
+![alt insctance-ip](img/insctance-ip.png)
 ## Regeln der Sicherheitsgruppe
-![alt aws](sicherheitsgruppe.png)
+![alt sicherheitsgruppe](img/sicherheitsgruppe.png)
 ## einloggen mysql Konsole und Resultat der Abfrage.
-![alt aws](sql.png)
+![alt sql](img/sql.png)
 
 ### Was macht die SQL Abfrage
 #### Abfrage

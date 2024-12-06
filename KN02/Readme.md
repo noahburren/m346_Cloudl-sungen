@@ -1,6 +1,6 @@
 # A Umgang mit AWS Kurs
 
-![alt aws](aws.png)
+![alt aws](img/aws.png)
 
  ---
 
@@ -32,11 +32,11 @@ i-03d0135d3a62129f5
  --- 
 
 ## Name und ID
-![alt aws](instance1.png)
+![alt instance1](img/instance1.png)
 ## IP
-![alt aws](instance2.png)
+![alt instance2](img/instance2.png)
 ## Status
-![alt aws](instance3.png)
+![alt instance3](img/instance3.png)
 
 ## Details
 Die Disk hat eine Volumengrösse von 8 GiB.
@@ -47,12 +47,12 @@ Es hat einen vCPU.
  --- 
 
 ## Schlüsselverbindung vorname1.pem
-![alt aws](vorname1.png)
+![alt vorname1](img/vorname1.png)
 
 ## Schlüsselverbindung vorname2.pem
-![alt aws](vorname2.png)
+![alt vorname2](img/vorname2.png)
 
 ## Schlüsseldetail beim Start
-![alt aws](schlüsseldetail.png)
+![alt schlüsseldetail](img/schlüsseldetail.png)
 
 
