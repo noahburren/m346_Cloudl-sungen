@@ -41,7 +41,7 @@ Ubuntu
 ## Prozessoren Hinzufügen
 Man konnte nicht mehr Prozessoren hinzufügen, als mein Laptop hat.
 
-![alt CPU Error](error-more-processor-than-host.png)
+![alt CPU Error](img/error-more-processor-than-host.png)
 
 ## lscpu | grep "CPU(s)"
 
@@ -50,11 +50,11 @@ Man konnte nicht mehr Prozessoren hinzufügen, als mein Laptop hat.
 ## RAM hinzufügen
 Man konnte nicht mehr RAM hinzufügen, als mein Laptop hat.
 
-![alt RAM Error](error-more-ram-than-host.png)
+![alt RAM Error](img/error-more-ram-than-host.png)
 
 ## free -h
 
-![alt lscpu](free-h.png)
+![alt free-h](img/free-h.png)
 
 ---
 
