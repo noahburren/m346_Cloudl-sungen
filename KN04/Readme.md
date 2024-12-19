@@ -15,3 +15,20 @@
 ## C) Template 
 ### Template mit Lehrer Key
 [cloud-init-template.yaml](./yaml/cloud-init-template.yaml)
+
+## D)  Installation automatisieren
+
+### Abgaben DB Server
+![alt cloud-init](img/konf.png)
+### Abgaben Webserver
+#### index.html
+![alt index.html](img/index.png)
+#### bd.php
+![alt db blocked.php](img/db-blockedpng.png)
+![alt db error.php](img/db-proceed-error.png)
+Ich konnte mich mit dem SQL von der Konsole aus anmelden und alles anzeigen lassen, die website hat es trotz allem nicht zugelassen
+### info.php
+![alt info.php](img/info.png)
+### admirer
+![alt admirer startseite.php](img/admirer.png)
+![alt admirer login.php](img/adminer.png)
