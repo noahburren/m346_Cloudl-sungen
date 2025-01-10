@@ -14,17 +14,28 @@ ssh_pwauth: false
 disable_root: false
 package_update: true
 packages:
+  - apache2
+  - php
+  - libapache2-mod-php
   - curl
   - wget
+  - adminer
+
+write_files:
+  # Konfiguration für die Apache-Webserver-Datei
+  - path: /var/www/html/index.php
+    content: |
+      <?php
+      echo "Hello, World!";
+      ?>
+  - path: /var/www/html/db.php
+    content: |
+      
+
 runcmd:
-  # Installiere MariaDB
-  - sudo apt-get update
-  - sudo apt-get install -y mariadb-server
-  # Konfigurationsdatei bearbeiten, um externe Verbindungen zuzulassen
-  - sudo sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mysql/mariadb.conf.d/50-server.cnf
-  # Überprüfen, ob die Konfiguration geändert wurde
-  - sudo grep 'bind-address' /etc/mysql/mariadb.conf.d/50-server.cnf
-  # MariaDB neu starten
-  - sudo systemctl restart mariadb
-  # Status von MariaDB anzeigen
-  - sudo systemctl status mariadb
+  # Aktiviert die Adminer-Konfiguration und startet Apache neu
+  - sudo a2enconf adminer
+  - sudo systemctl restart apache2
+
+  # Zeigt den Apache-Status an
+  - sudo systemctl status apache2

@@ -13,18 +13,12 @@ users:
 ssh_pwauth: false
 disable_root: false
 package_update: true
-packages:
+packages: # Packages to install
   - curl
   - wget
+  - mariadb-server
+  - php-mysqli
 runcmd:
-  # Installiere MariaDB
-  - sudo apt-get update
-  - sudo apt-get install -y mariadb-server
-  # Konfigurationsdatei bearbeiten, um externe Verbindungen zuzulassen
+  - sudo mysql sfu root -e "GRANT ALL ON *.* TO 'admin'@'%' IDENTIFIED BY 'admin' WITH GRANT OPTION;"
   - sudo sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mysql/mariadb.conf.d/50-server.cnf
-  # Überprüfen, ob die Konfiguration geändert wurde
-  - sudo grep 'bind-address' /etc/mysql/mariadb.conf.d/50-server.cnf
-  # MariaDB neu starten
-  - sudo systemctl restart mariadb
-  # Status von MariaDB anzeigen
-  - sudo systemctl status mariadb
+  - sudo systemctl restart mariadb.service

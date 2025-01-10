@@ -16,15 +16,16 @@ package_update: true
 packages:
   - curl
   - wget
+
 runcmd:
   # Installiere MariaDB
   - sudo apt-get update
   - sudo apt-get install -y mariadb-server
-  # Konfigurationsdatei bearbeiten, um externe Verbindungen zuzulassen
+  # Ändere die Konfiguration, um externe Verbindungen zu erlauben
   - sudo sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mysql/mariadb.conf.d/50-server.cnf
-  # Überprüfen, ob die Konfiguration geändert wurde
-  - sudo grep 'bind-address' /etc/mysql/mariadb.conf.d/50-server.cnf
-  # MariaDB neu starten
+  # Starte MariaDB neu
   - sudo systemctl restart mariadb
-  # Status von MariaDB anzeigen
+  # Zeige den relevanten Schlüssel der Konfigurationsdatei an
+  - sudo grep 'bind-address' /etc/mysql/mariadb.conf.d/50-server.cnf
+  # Zeige Status von MariaDB an
   - sudo systemctl status mariadb

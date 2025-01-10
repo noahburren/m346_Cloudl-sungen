@@ -10,35 +10,53 @@ users:
       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC36qk7SFqP6U/sFvr2ARq29xv3q9MI01mFrlIDN05snykJzWJZz616sCyhNkE+h9uT4GH6YVPhi3bxFBWfEtfKY3Lztf2/hYL4Y4aqByQZ6cb28WQjijjw2xN1yhunQM5Y+U4S7mV2leZ7xLFfWwXoQdJfbUT3A6XN2DAMHH7PgoLA68WxOy1fIDEPs9kfM/KUCdm/jyGM7RxzKw9xrs9gsFmtb7ZKKWPGYJ0de/L9vRoFC1wGsSBjNVTto/HG/Zn5a+5jdUVvO5MdfWikq8Ky2hOPUQQ36HC9CCpDyuSzdcYiOVFccmzA4HibTjgI0oh09Z0BKtCis+2uDZQBL0Z/ aws-key
       # Lehrer Key
       - ssh-rsa MIIBCgKCAQEA8lshkw886qvWI7jKrK3F0TIWVawmw/nJy9mC6Uy205Yto13F+piEllc6z0FhJBeTj1glbVqVKchII8Hu5uxOc76SNGxoj63c6z5juUjIRSNIESSuVXSRFZefVwqJW+Lnqod3ML6W19pDFfH6tOFmPkqPJhhZWfhAfknb1pIHc3XtCjqF/KWUI3v6w+hqRxfSY7pdO+Q9ZJpUuGlJVJhpDN3OmeY/6YS48k0Wsijg/3WckxFUhmWkvXLHd0Lv2/fKqB/Vabxu/q4vkTTIdyGJCKTkSY4ZQscb2+rk0fPVnLzU/eJDQQNBlBAkJILhJS48fVkkdEcIpnzr+G/hMI/7FwIDAQAB aws-key
-ssh_pwauth: false
-disable_root: false
-package_update: true
-packages:
+ssh_pwauth: false # Disable password authentication
+disable_root: false # Disable root login, so no one can log in as root
+package_update: true # Update packages
+packages: # Packages to install
+  - curl
+  - wget
   - apache2
   - php
   - libapache2-mod-php
-  - curl
-  - wget
   - adminer
-
 write_files:
-  # Konfiguration für die Apache-Webserver-Datei
-  - path: /var/www/html/index.php
+  - path: /var/www/html/db.php
+    content: |
+      <html>
+      <head></head>
+      <body>
+      Diese Seite macht eine Abfrage auf die Datenbank. <br />
+      Das ausgeführte Query ist: <i>select Host, User from mysql.user;</i><br /><br />
+      Das Resultat: <br />
+      <?php
+              //database
+              $servername = "52.205.250.77";
+              $username = "admin";
+              $password = "admin";
+              $dbname = "mysql";
+
+              // Create connection
+              $conn = new mysqli($servername, $username, $password, $dbname);
+              // Check connection
+              if ($conn->connect_error) {
+                      die("Connection failed: " . $conn->connect_error);
+              }
+
+              $sql = "select Host, User from mysql.user;";
+              $result = $conn->query($sql);
+              while($row = $result->fetch_assoc()){
+                      echo("<li>" . $row["Host"] . " / " . $row["User"] . "</li>");
+              }
+              //var_dump($result);
+      ?>
+      </body>
+      </html>
+  - path: /var/www/html/info.php
     content: |
       <?php
-      echo "Hello, World!";
+      phpinfo();
       ?>
-  - path: /etc/apache2/sites-available/000-default.conf
-    content: |
-      <VirtualHost *:80>
-          DocumentRoot /var/www/html
-          ServerName localhost
-      </VirtualHost>
-
 runcmd:
-  # Aktiviert die Adminer-Konfiguration und startet Apache neu
   - sudo a2enconf adminer
   - sudo systemctl restart apache2
-
-  # Zeigt den Apache-Status an
-  - sudo systemctl status apache2
