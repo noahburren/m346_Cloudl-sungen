@@ -30,8 +30,7 @@ Ich konnte mich mit dem SQL von der Konsole aus anmelden und alles anzeigen lass
 ### info.php
 ![alt info.php](../KN04-alt/img/info.png)
 ### admirer
-![alt admirer login.php](../KN04-alt/img/adminer.png)
-![alt admirer startseite.php](../KN04-alt/img/admirer.png)
+![alt admirer login.php](./img/admirer.png)
 
 
 
