@@ -18,6 +18,22 @@
 
 # D) Installation automatisieren (70%)
 
+### Abgaben DB Server
+![alt cloud-init](../KN04-alt/img/konf.png)
+### Abgaben Webserver
+#### index.html
+![alt index.html](../KN04-alt/img/index.png)
+#### db.php
+![alt db blocked.php](../KN04-alt/img/db-blockedpng.png)
+![alt db error.php](../KN04-alt/img/db-proceed-error.png)
+Ich konnte mich mit dem SQL von der Konsole aus anmelden und alles anzeigen lassen, die website hat es trotz allem nicht zugelassen
+### info.php
+![alt info.php](../KN04-alt/img/info.png)
+### admirer
+![alt admirer login.php](../KN04-alt/img/adminer.png)
+![alt admirer startseite.php](../KN04-alt/img/admirer.png)
+
+
 
 
 
