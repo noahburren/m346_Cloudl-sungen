@@ -1,0 +1,14 @@
+Übersicht über die Schätzung
+Vorabkosten,Monatliche Kosten,Total 12 months cost,Währung
+0,12.99,155.88,USD
+,,* Einschliesslich Vorabkosten
+
+
+Detaillierte Schätzung
+Gruppenhierarchie,Region,Beschreibung,Service,Vorauszahlung,Monatlich,First 12 months total,Währung,Status,Konfigurationsübersicht
+My Estimate,Europa (Zürich),Webserver,Amazon EC2 ,0,12.994,155.93,USD,,"Tenancy (Gemeinsame Instances), Betriebssystem (Ubuntu Pro), Workload (Consistent, Anzahl der Instances: 1), Erweiterte EC2-Instance (t3.small), Pricing strategy (Compute Savings Plans 3yr  No Upfront), Überwachung aktivieren (deaktiviert), DT Eingehend: Not selected (0 TB pro Monat), DT Ausgehend: Not selected (0 TB pro Monat), DT Intraregional: (0 TB pro Monat)"
+
+
+
+Bestätigung
+"* Der AWS Pricing Calculator gibt nur einen Überblick über Ihre AWS-Gebühren und enthält keine anfallenden Steuern. Ihre tatsächlichen Gebühren hängen von einer Vielzahl von Faktoren ab, einschliesslich Ihrer tatsächlichen Nutzung der AWS-Services."

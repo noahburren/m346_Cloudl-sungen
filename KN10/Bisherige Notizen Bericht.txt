@@ -1,0 +1,108 @@
+1. Webserver
+On-Premise Infrastruktur:
+1 Core, 2 GB RAM, 20 GB Speicher, Ubuntu.
+Der Webserver ist einfach konfiguriert und dient lediglich zur Bereitstellung der Anwendung.
+Cloud-Komponente:
+AWS: Amazon EC2 (t3.small: 2 vCPUs, 2 GB RAM).
+Azure: Virtual Machine (B1ms: 1 vCPU, 2 GB RAM).
+Abweichungen und Gründe:
+Die kleinsten verfügbaren Instanzen in der Cloud sind oft leistungsstärker oder bieten mehr Ressourcen (z. B. 2 vCPUs bei AWS).
+Die Speichergröße (20 GB) wird durch die Festplattenoption (EBS bei AWS oder Managed Disk bei Azure) bereitgestellt.
+Die Wahl fiel auf die kostengünstigsten Instanzen, die den Anforderungen entsprechen.
+Vorteil: Skalierbarkeit. Bei Bedarf können Ressourcen schnell angepasst werden.
+Grund für Abweichung: Cloud-Instanzen sind vorab definiert, daher keine 1:1 Anpassung möglich.
+2. Datenbankserver
+On-Premise Infrastruktur:
+2 Cores, 4 GB RAM, 100 GB Speicher, Ubuntu.
+Datenbankserver war manuell verwaltet.
+Cloud-Komponente:
+AWS: Amazon RDS (db.t3.medium: 2 vCPUs, 4 GB RAM, 100 GB SSD).
+Azure: Azure SQL Database (General Purpose, 2 vCores, 4 GB RAM, 100 GB Speicher).
+Abweichungen und Gründe:
+Managed Service:
+
+Statt einer selbst verwalteten VM wurde ein Managed Database Service gewählt.
+Vorteil: Automatisierte Backups, Upgrades, und hohe Verfügbarkeit.
+Grund für Abweichung: Der Betrieb eines Managed Service reduziert administrativen Aufwand und Fehlerquellen.
+Speichergröße:
+
+Die Spezifikationen (100 GB) wurden übernommen, mit der Möglichkeit, bei Bedarf zu skalieren.
+Performance:
+
+RDS und Azure SQL bieten eine optimierte Umgebung für Datenbanken (besser als eine manuelle Installation auf einer VM).
+3. Backups
+On-Premise Infrastruktur:
+Manuelle Speicherung der Backups auf lokalem Speicher.
+Backup-Plan:
+Täglich für 7 Tage.
+Wöchentlich für einen Monat.
+Monatlich für 3 Monate.
+Cloud-Komponente:
+AWS:
+
+Tägliche Backups: Amazon S3 Standard.
+Wöchentliche Backups: Amazon S3 Infrequent Access.
+Monatliche Backups: Amazon S3 Glacier (bzw. Deep Archive für ältere Backups).
+Azure:
+
+Tägliche Backups: Blob Storage Hot Tier.
+Wöchentliche Backups: Blob Storage Cool Tier.
+Monatliche Backups: Blob Storage Archive Tier.
+Abweichungen und Gründe:
+Kosteneffizienz:
+
+Statt eines einheitlichen Speichers (wie bei On-Premise) wurde eine abgestufte Speicherlösung gewählt.
+Kalte (selten abgerufene) Backups sind günstiger als heiße Speicheroptionen.
+Zugriffszeiten:
+
+Tägliche Backups bleiben schnell verfügbar (Hot).
+Wöchentliche/monatliche Backups werden seltener benötigt und können daher in günstigeren Stufen gespeichert werden (Cool/Archive).
+Sicherheit und Redundanz:
+
+Cloud-Backups werden in verteilten Regionen gespeichert, was bei On-Premise nicht ohne weiteres möglich ist.
+4. Skalierbarkeit und Verfügbarkeit
+On-Premise Infrastruktur:
+Ressourcen waren festgelegt, ohne Skalierungsmöglichkeiten.
+Bei Ausfällen mussten Hardware-Reparaturen manuell erfolgen.
+Cloud-Komponente:
+Cloud-Instanzen und Services sind skalierbar und bieten hohe Verfügbarkeit (z. B. durch Multi-AZ bei RDS oder Azure SQL).
+Abweichungen und Gründe:
+Automatisches Scaling: Cloud-Ressourcen können bei Bedarf automatisch erhöht oder verringert werden, was bei On-Premise nicht möglich ist.
+Redundanz: Durch Cloud-Regionen und Verfügbarkeitszonen werden Ausfallzeiten minimiert.
+Zusammenfassung
+Komponente	On-Premise	Cloud (AWS/Azure)	Grund für Abweichung
+Webserver	1 Core, 2 GB RAM	t3.small (AWS) / B1ms (Azure)	Mindestgröße der Instanzen, bessere Skalierung
+Datenbankserver	2 Cores, 4 GB RAM	RDS db.t3.medium / Azure SQL General Purpose	Managed Service für weniger Aufwand
+Backups	Lokaler Speicher	S3/Blob Hot, Cool, Glacier/Archive	Kosteneffizienz, Sicherheit, Redundanz
+Diese Anpassungen optimieren die Betriebskosten und die Verfügbarkeit, während sie die ursprünglichen Anforderungen Ihrer Firma berücksichtigen.
+
+
+
+
+
+Erklärung der Auswahl der Komponenten und Abweichungen zur On-Premise-Infrastruktur
+Webserver
+On-Premise: Ein einfacher Ubuntu-Server mit 1 Core und 2 GB RAM.
+Heroku: Standard-2X Dyno (2 Cores, 1 GB RAM).
+Grund für Abweichung: Heroku-Dynos sind vorkonfiguriert. Ein Standard-2X Dyno bietet ausreichende Leistung für die 30 Benutzer und ist eine kostengünstige PaaS-Option. 1 GB RAM ist für Webanwendungen in Heroku-Umgebungen optimiert.
+Datenbank
+On-Premise: 2 Cores, 4 GB RAM, 100 GB Speicher, manuell verwaltet.
+Heroku: Postgres Standard-0 (64 GB Speicher, gemanagt).
+Grund für Abweichung: Heroku bietet Managed Database Services, wodurch der administrative Aufwand entfällt (automatisierte Backups, Skalierung, Fehlerbehebung). Die Reduzierung des Speichers auf 64 GB wurde gewählt, da der Bedarf mit 30 Benutzern unter dieser Grenze liegt.
+Backups
+On-Premise: Manuelle Backups lokal gespeichert.
+Heroku: Automatisierte Backups (im Plan enthalten).
+Grund für Abweichung: Heroku vereinfacht das Backup-Management, reduziert Speicheranforderungen und bietet Wiederherstellungsmöglichkeiten direkt aus der Plattform.
+
+
+
+
+
+
+Kostenrechnung SAAS - Repurchasing
+Bilder für Auswahlmöglichkeiten
+Auswahl:
+Zoho CRM: Professional Plan (23*30=690/Monat)
+SalesForce: Starter Suite (25*30=750/Monat)
+Ausgewählt: Zoho CRM
+Wieso? Günstiger, Professional Plan von Zoho bietet mehr Funktionen als der Plan von Salesforce (BSP: Automatisierungen), Zoho ist einfacher zu implementieren, Zoho bietet bessere Anpassungsoptionen
