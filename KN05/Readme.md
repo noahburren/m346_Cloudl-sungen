@@ -51,3 +51,5 @@ Eine statische IP ändert sich nicht und bleibt dauerhaft einem Gerät zugewiese
 ## Öffentliche, statische IP
 ### Elastic IP
 ![alt elastic](img/elastic.png)
+
+## Instanzen erstellen
