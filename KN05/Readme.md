@@ -44,12 +44,28 @@ Eine statische IP ändert sich nicht und bleibt dauerhaft einem Gerät zugewiese
 ![alt sg](img/sg.png)
 ### Inbound-Regeln
 #### SG-Web
-![alt sg](img/sg-web.png)
+![alt sg-web](img/sg-web.png)
 #### SG-DB
-![alt sg](img/sg-db.png)
+![alt sg-db](img/sg-db.png)
 
 ## Öffentliche, statische IP
 ### Elastic IP
 ![alt elastic](img/elastic.png)
 
 ## Instanzen erstellen
+Screenshot der Liste der Instanzen, wenn beide Instanzen gestoppt sind. Die Werte der öffentlichen und private IPs und der Status (gestoppt) müssen sichtbar sein.
+![alt web-stop](img/web-stop.png)
+![alt db-stop](img/db-stop.png)
+
+Screenshot der Details beider Instanzen, so dass die Subnet ID sichtbar ist. Dies kann im Screenshot oben bereits enthalten sein. Dann benötigen Sie nur einen Screenshot
+![alt web-sub](img/web-sub.png)
+![alt db-sub](img/db-sub.png)
+
+### index.html
+![alt index](img/index.png)
+
+### info.php
+![alt info](img/info.png)
+
+### db.php
+![alt db](img/db.png)
