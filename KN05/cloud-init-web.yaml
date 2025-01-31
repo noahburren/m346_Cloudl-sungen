@@ -1,0 +1,62 @@
+#cloud-config
+users:
+  - name: ubuntu
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: users, admin
+    home: /home/ubuntu
+    shell: /bin/bash
+    ssh_authorized_keys:
+      # Persönlicher vorname1 Key
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC36qk7SFqP6U/sFvr2ARq29xv3q9MI01mFrlIDN05snykJzWJZz616sCyhNkE+h9uT4GH6YVPhi3bxFBWfEtfKY3Lztf2/hYL4Y4aqByQZ6cb28WQjijjw2xN1yhunQM5Y+U4S7mV2leZ7xLFfWwXoQdJfbUT3A6XN2DAMHH7PgoLA68WxOy1fIDEPs9kfM/KUCdm/jyGM7RxzKw9xrs9gsFmtb7ZKKWPGYJ0de/L9vRoFC1wGsSBjNVTto/HG/Zn5a+5jdUVvO5MdfWikq8Ky2hOPUQQ36HC9CCpDyuSzdcYiOVFccmzA4HibTjgI0oh09Z0BKtCis+2uDZQBL0Z/ aws-key
+      # Lehrer Key
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDyWyGTDzzqq9YjuMqsrcXRMhZVrCbD+cnL2YLpTLbTli2jXcX6mISWVzrPQWEkF5OPWCVtWpUpyEgjwe7m7E5zvpI0bGiPrdzrPmO5SMhFI0gRJK5VdJEVl59XColb4ueqh3cwvpbX2kMV8fq04WY+So8mGFlZ+EB+SdvWkgdzde0KOoX8pZQje/rD6GpHF9Jjul075D1kmlS4aUlUmGkM3c6Z5j/phLjyTRayKOD/dZyTEVSGZaS9csd3Qu/b98qoH9VpvG7+ri+RNMh3IYkIpORJjhlCxxvb6uTR89WcvNT94kNBA0GUECQkguElLjx9WSR0RwimfOv4b+Ewj/sX tbz_aws_atilgan
+ssh_pwauth: false # Disable password authentication
+disable_root: false # Disable root login, so no one can log in as root
+package_update: true # Update packages
+packages: # Packages to install
+  - curl
+  - wget
+  - apache2
+  - php
+  - libapache2-mod-php
+  - adminer
+write_files:
+  - path: /var/www/html/db.php
+    content: |
+      <html>
+      <head></head>
+      <body>
+      Diese Seite macht eine Abfrage auf die Datenbank. <br />
+      Das ausgeführte Query ist: <i>select Host, User from mysql.user;</i><br /><br />
+      Das Resultat: <br />
+      <?php
+              //database
+              $servername = "172.31.0.20";
+              $username = "admin";
+              $password = "admin";
+              $dbname = "mysql";
+
+              // Create connection
+              $conn = new mysqli($servername, $username, $password, $dbname);
+              // Check connection
+              if ($conn->connect_error) {
+                      die("Connection failed: " . $conn->connect_error);
+              }
+
+              $sql = "select Host, User from mysql.user;";
+              $result = $conn->query($sql);
+              while($row = $result->fetch_assoc()){
+                      echo("<li>" . $row["Host"] . " / " . $row["User"] . "</li>");
+              }
+              //var_dump($result);
+      ?>
+      </body>
+      </html>
+  - path: /var/www/html/info.php
+    content: |
+      <?php
+      phpinfo();
+      ?>
+runcmd:
+  - sudo a2enconf adminer
+  - sudo systemctl restart apache2

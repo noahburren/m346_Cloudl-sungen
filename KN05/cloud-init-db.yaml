@@ -1,0 +1,27 @@
+#cloud-config
+users:
+  - name: ubuntu
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: users, admin
+    home: /home/ubuntu
+    shell: /bin/bash
+    ssh_authorized_keys:
+      # Persönlicher vorname1 Key
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC36qk7SFqP6U/sFvr2ARq29xv3q9MI01mFrlIDN05snykJzWJZz616sCyhNkE+h9uT4GH6YVPhi3bxFBWfEtfKY3Lztf2/hYL4Y4aqByQZ6cb28WQjijjw2xN1yhunQM5Y+U4S7mV2leZ7xLFfWwXoQdJfbUT3A6XN2DAMHH7PgoLA68WxOy1fIDEPs9kfM/KUCdm/jyGM7RxzKw9xrs9gsFmtb7ZKKWPGYJ0de/L9vRoFC1wGsSBjNVTto/HG/Zn5a+5jdUVvO5MdfWikq8Ky2hOPUQQ36HC9CCpDyuSzdcYiOVFccmzA4HibTjgI0oh09Z0BKtCis+2uDZQBL0Z/ aws-key
+      # Lehrer Key
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDyWyGTDzzqq9YjuMqsrcXRMhZVrCbD+cnL2YLpTLbTli2jXcX6mISWVzrPQWEkF5OPWCVtWpUpyEgjwe7m7E5zvpI0bGiPrdzrPmO5SMhFI0gRJK5VdJEVl59XColb4ueqh3cwvpbX2kMV8fq04WY+So8mGFlZ+EB+SdvWkgdzde0KOoX8pZQje/rD6GpHF9Jjul075D1kmlS4aUlUmGkM3c6Z5j/phLjyTRayKOD/dZyTEVSGZaS9csd3Qu/b98qoH9VpvG7+ri+RNMh3IYkIpORJjhlCxxvb6uTR89WcvNT94kNBA0GUECQkguElLjx9WSR0RwimfOv4b+Ewj/sX tbz_aws_atilgan
+ssh_pwauth: false
+disable_root: false
+package_update: true
+packages:
+  - curl
+  - wget
+- mariadb-server
+runcmd:
+  # Konfigurationsdatei bearbeiten, um externe Verbindungen zuzulassen
+  - sudo sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mysql/mariadb.conf.d/50-server.cnf
+  # MariaDB neu starten
+  - sudo systemctl restart mariadb
+  # Status von MariaDB anzeigen
+  - sudo systemctl status mariadb
+  - sudo mysql -sfu root -e "GRANT ALL ON . TO 'admin'@'%' IDENTIFIED BY 'admin' WITH GRANT OPTION;"
