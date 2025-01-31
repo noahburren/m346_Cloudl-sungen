@@ -1,6 +1,7 @@
 # A)
 ## Kurze Erklärung in eigenen Worten was ein Reverse Proxy ist.
-Ein Reverse Proxy leitet Client-Anfragen an Backend-Server weiter und verbirgt deren Struktur. Er dient zur Lastverteilung, Sicherheit und Leistungsoptimierung.## Screenshot der zeigt, dass Sie die Swagger-URL aufrufen können.
+Ein Reverse Proxy leitet Client-Anfragen an Backend-Server weiter und verbirgt deren Struktur. Er dient zur Lastverteilung, Sicherheit und Leistungsoptimierung.
+## Screenshot der zeigt, dass Sie die Swagger-URL aufrufen können.
 ![alt swagger](img/swagger.png)
 
 ## Screenshot der zeigt, dass sie den Endpoint products (Java), respGetProducts (.NET) aufrufen können (via Swagger) und auch ein korrektes Resultat bekommen.
